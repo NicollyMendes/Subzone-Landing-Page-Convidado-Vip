@@ -118,32 +118,39 @@
       color: var(--vermelho-pressao);
       text-shadow: 0 0 40px rgba(241,18,13,0.5), 0 0 80px rgba(241,18,13,0.2);
       animation: neon-flicker 2.5s ease-in-out infinite;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background: transparent;
+      padding: 0;
+      display: inline;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
     }
 
     @keyframes neon-flicker {
       0%   { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.6), 0 0 80px rgba(241,18,13,0.3); }
-      3%   { opacity: 0.4;  text-shadow: 0 0 4px rgba(241,18,13,0.1); color: #8A0B08; }
+      3%   { opacity: 0.4;  text-shadow: 0 0 4px rgba(241,18,13,0.1); }
       5%   { opacity: 1;    text-shadow: 0 0 60px rgba(241,18,13,0.8), 0 0 120px rgba(241,18,13,0.4); }
-      7%   { opacity: 0.55; text-shadow: 0 0 2px rgba(241,18,13,0.05); color: #8A0B08; }
-      8%   { opacity: 0.3;  text-shadow: none; color: #5a0604; }
-      10%  { opacity: 1;    text-shadow: 0 0 70px rgba(255,26,18,0.9), 0 0 140px rgba(241,18,13,0.5); color: var(--vermelho-glow); }
-      13%  { opacity: 0.85; text-shadow: 0 0 30px rgba(241,18,13,0.4); color: var(--vermelho-pressao); }
+      7%   { opacity: 0.55; text-shadow: 0 0 2px rgba(241,18,13,0.05); }
+      8%   { opacity: 0.3;  text-shadow: none; }
+      10%  { opacity: 1;    text-shadow: 0 0 70px rgba(255,26,18,0.9), 0 0 140px rgba(241,18,13,0.5); }
+      13%  { opacity: 0.85; text-shadow: 0 0 30px rgba(241,18,13,0.4); }
       15%  { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.6), 0 0 80px rgba(241,18,13,0.3); }
       30%  { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.5), 0 0 80px rgba(241,18,13,0.25); }
-      32%  { opacity: 0.5;  text-shadow: 0 0 3px rgba(241,18,13,0.08); color: #8A0B08; }
-      33%  { opacity: 1;    text-shadow: 0 0 80px rgba(255,26,18,1), 0 0 150px rgba(241,18,13,0.5); color: var(--vermelho-glow); }
-      35%  { opacity: 0.7;  text-shadow: 0 0 10px rgba(241,18,13,0.2); color: var(--vermelho-pressao); }
+      32%  { opacity: 0.5;  text-shadow: 0 0 3px rgba(241,18,13,0.08); }
+      33%  { opacity: 1;    text-shadow: 0 0 80px rgba(255,26,18,1), 0 0 150px rgba(241,18,13,0.5); }
+      35%  { opacity: 0.7;  text-shadow: 0 0 10px rgba(241,18,13,0.2); }
       36%  { opacity: 1;    text-shadow: 0 0 50px rgba(241,18,13,0.6), 0 0 100px rgba(241,18,13,0.3); }
       55%  { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.5), 0 0 80px rgba(241,18,13,0.25); }
-      57%  { opacity: 0.35; text-shadow: none; color: #5a0604; }
-      58%  { opacity: 0.6;  text-shadow: 0 0 5px rgba(241,18,13,0.1); color: #8A0B08; }
-      59%  { opacity: 0.25; text-shadow: none; color: #3d0403; }
-      61%  { opacity: 1;    text-shadow: 0 0 90px rgba(255,26,18,1), 0 0 160px rgba(241,18,13,0.6), 0 0 200px rgba(241,18,13,0.2); color: var(--vermelho-glow); }
-      64%  { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.5), 0 0 80px rgba(241,18,13,0.25); color: var(--vermelho-pressao); }
+      57%  { opacity: 0.35; text-shadow: none; }
+      58%  { opacity: 0.6;  text-shadow: 0 0 5px rgba(241,18,13,0.1); }
+      59%  { opacity: 0.25; text-shadow: none; }
+      61%  { opacity: 1;    text-shadow: 0 0 90px rgba(255,26,18,1), 0 0 160px rgba(241,18,13,0.6), 0 0 200px rgba(241,18,13,0.2); }
+      64%  { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.5), 0 0 80px rgba(241,18,13,0.25); }
       80%  { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.5), 0 0 80px rgba(241,18,13,0.25); }
-      82%  { opacity: 0.45; text-shadow: 0 0 3px rgba(241,18,13,0.05); color: #8A0B08; }
-      83%  { opacity: 1;    text-shadow: 0 0 70px rgba(255,26,18,0.9), 0 0 130px rgba(241,18,13,0.4); color: var(--vermelho-glow); }
-      85%  { opacity: 0.6;  text-shadow: 0 0 8px rgba(241,18,13,0.15); color: var(--vermelho-pressao); }
+      82%  { opacity: 0.45; text-shadow: 0 0 3px rgba(241,18,13,0.05); }
+      83%  { opacity: 1;    text-shadow: 0 0 70px rgba(255,26,18,0.9), 0 0 130px rgba(241,18,13,0.4); }
+      85%  { opacity: 0.6;  text-shadow: 0 0 8px rgba(241,18,13,0.15); }
       86%  { opacity: 1;    text-shadow: 0 0 50px rgba(241,18,13,0.6), 0 0 100px rgba(241,18,13,0.3); }
       100% { opacity: 1;    text-shadow: 0 0 40px rgba(241,18,13,0.6), 0 0 80px rgba(241,18,13,0.3); }
     }
