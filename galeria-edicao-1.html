@@ -8,9 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ═══════════════════════════════════════
-       VARIÁVEIS — SUBZONE BRAND
-       ═══════════════════════════════════════ */
     :root {
       --vermelho-pressao: #F1120D;
       --preto-subsolo: #030405;
@@ -37,27 +34,16 @@
       overflow-x: hidden;
     }
 
-    /* ═══════════════════════════════════════
-       NOISE + SCANLINES (background texture)
-       ═══════════════════════════════════════ */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.03) 2px,
-        rgba(0,0,0,0.03) 4px
-      );
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
       pointer-events: none;
       z-index: 9999;
     }
 
-    /* ═══════════════════════════════════════
-       HEADER
-       ═══════════════════════════════════════ */
+    /* ═══ HEADER ═══ */
     .gal-header {
       position: relative;
       padding: 3rem 1.5rem 2rem;
@@ -65,7 +51,6 @@
       border-bottom: 1px solid rgba(241, 18, 13, 0.15);
       overflow: hidden;
     }
-
     .gal-header::before {
       content: '';
       position: absolute;
@@ -121,9 +106,7 @@
     }
     .gal-meta .count { color: var(--vermelho-pressao); font-weight: 600; }
 
-    /* ═══════════════════════════════════════
-       GRID MASONRY (CSS columns)
-       ═══════════════════════════════════════ */
+    /* ═══ GRID MASONRY ═══ */
     .photo-grid {
       column-count: 3;
       column-gap: 6px;
@@ -131,7 +114,6 @@
       max-width: 1400px;
       margin: 0 auto;
     }
-
     @media (max-width: 900px) { .photo-grid { column-count: 2; } }
     @media (max-width: 520px) { .photo-grid { column-count: 2; column-gap: 4px; padding: 0.5rem; } }
 
@@ -144,7 +126,6 @@
       border-radius: 2px;
       background: var(--grafite-industrial);
     }
-
     @media (max-width: 520px) { .photo-item { margin-bottom: 4px; } }
 
     .photo-item img {
@@ -154,7 +135,6 @@
       transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
       filter: saturate(0.85);
     }
-
     .photo-item:hover img {
       transform: scale(1.04);
       filter: saturate(1) brightness(1.05);
@@ -171,7 +151,6 @@
     }
     .photo-item:hover::after { opacity: 1; }
 
-    /* Tag de número no canto */
     .photo-item .photo-num {
       position: absolute;
       bottom: 8px;
@@ -186,9 +165,30 @@
     }
     .photo-item:hover .photo-num { opacity: 1; }
 
-    /* ═══════════════════════════════════════
-       EMPTY STATE (se não houver fotos)
-       ═══════════════════════════════════════ */
+    /* ═══ DOWNLOAD (grid) ═══ */
+    .photo-item .download-btn {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      width: 32px;
+      height: 32px;
+      background: rgba(3,4,5,0.7);
+      border: 1px solid rgba(241,18,13,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s, background 0.3s;
+      z-index: 3;
+      text-decoration: none;
+    }
+    .photo-item:hover .download-btn { opacity: 1; }
+    .download-btn:hover { background: rgba(241,18,13,0.8); }
+    .download-btn svg { width: 14px; height: 14px; stroke: var(--off-white-sujo); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ═══ EMPTY STATE ═══ */
     .empty-state {
       text-align: center;
       padding: 6rem 2rem;
@@ -206,9 +206,7 @@
       letter-spacing: 0.05em;
     }
 
-    /* ═══════════════════════════════════════
-       LIGHTBOX
-       ═══════════════════════════════════════ */
+    /* ═══ LIGHTBOX ═══ */
     .lightbox {
       display: none;
       position: fixed;
@@ -229,7 +227,6 @@
       border-radius: 2px;
       animation: lbFadeIn 0.25s ease;
     }
-
     @keyframes lbFadeIn {
       from { opacity: 0; transform: scale(0.96); }
       to { opacity: 1; transform: scale(1); }
@@ -267,14 +264,36 @@
       letter-spacing: 0.15em;
     }
 
-    /* Swipe hint no mobile */
+    /* ═══ DOWNLOAD (lightbox) ═══ */
+    .lb-download {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 8px 16px;
+      background: rgba(241,18,13,0.85);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #fff;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+    .lb-download:hover { background: var(--vermelho-glow); }
+    .lb-download svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
     @media (max-width: 768px) {
       .lb-prev, .lb-next { display: none; }
     }
 
-    /* ═══════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════ */
+    /* ═══ FOOTER ═══ */
     .gal-footer {
       text-align: center;
       padding: 3rem 1.5rem;
@@ -291,9 +310,6 @@
     }
     .gal-footer a:hover { color: var(--vermelho-glow); }
 
-    /* ═══════════════════════════════════════
-       LOADING ANIMATION
-       ═══════════════════════════════════════ */
     .photo-item.loading {
       min-height: 200px;
       background: var(--grafite-industrial);
@@ -311,17 +327,14 @@
 /* ══════════════════════════════════════════════════════════════
    ★★★  CONFIGURAÇÃO DA GALERIA — EDITE AQUI  ★★★
    
-   Para adicionar fotos, coloque os arquivos na pasta "fotos/edicao1/"
-   e adicione o caminho no array abaixo. Exemplo:
+   Coloque os arquivos na pasta "fotos/edicao1/"
+   e adicione o caminho no array abaixo.
    
    const FOTOS = [
-     "fotos/edicao1/001.jpg",
-     "fotos/edicao1/002.jpg",
-     "fotos/edicao1/003.jpg",
+     "fotos/edicao1/1.jpg",
+     "fotos/edicao1/2.jpg",
+     "fotos/edicao1/3.jpg",
    ];
-   
-   Aceita .jpg, .jpeg, .png, .webp — qualquer formato de imagem.
-   A ordem do array é a ordem que aparece na galeria.
    
    ══════════════════════════════════════════════════════════════ */
 
@@ -330,9 +343,28 @@ const FOTOS = [
   // "fotos/edicao1/001.jpg",
   // "fotos/edicao1/002.jpg",
   // "fotos/edicao1/003.jpg",
+  "fotos/edicao1/1.png",
+  "fotos/edicao1/2.png",
+  "fotos/edicao1/3.png",
+  "fotos/edicao1/4.png",
+  "fotos/edicao1/5.png",
+  "fotos/edicao1/6.png",
+  "fotos/edicao1/7.png",
+  "fotos/edicao1/8.png",
+  "fotos/edicao1/9.png",
+  "fotos/edicao1/10.png",
+  "fotos/edicao1/12.png",
+  "fotos/edicao1/13.png",
+  "fotos/edicao1/14.png",
+  "fotos/edicao1/15.png",
+  "fotos/edicao1/16.png",
+  "fotos/edicao1/17.png",
+  "fotos/edicao1/19.png",
+  "fotos/edicao1/20.png",
+  "fotos/edicao1/21.png",
+  "fotos/edicao1/22.png",
 ];
 
-/* Info da edição (aparece no header) */
 const EDICAO = {
   numero: "#001",
   nome: "A Primeira Descida",
@@ -358,7 +390,7 @@ const EDICAO = {
   </div>
 </header>
 
-<!-- GRID (renderizado via JS) -->
+<!-- GRID -->
 <main class="photo-grid" id="photoGrid"></main>
 
 <!-- EMPTY STATE -->
@@ -380,6 +412,10 @@ const EDICAO = {
   </button>
   <img id="lbImg" src="" alt="Subzone">
   <div class="lb-counter" id="lbCounter"></div>
+  <a class="lb-download" id="lbDownload" download>
+    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Baixar
+  </a>
 </div>
 
 <!-- FOOTER -->
@@ -389,7 +425,6 @@ const EDICAO = {
 
 <script>
 (() => {
-  /* ── Preenche header ── */
   document.getElementById('edicaoNum').textContent = EDICAO.numero;
   document.getElementById('edicaoNome').textContent = EDICAO.nome;
   document.getElementById('metaLocal').textContent = EDICAO.local;
@@ -399,7 +434,6 @@ const EDICAO = {
   const emptyState = document.getElementById('emptyState');
   const countEl = document.getElementById('photoCount');
 
-  /* ── Se não tem fotos, mostra empty state ── */
   if (!FOTOS.length) {
     grid.style.display = 'none';
     emptyState.style.display = 'block';
@@ -408,7 +442,8 @@ const EDICAO = {
 
   countEl.textContent = FOTOS.length;
 
-  /* ── Renderiza grid ── */
+  const dlIcon = '<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+
   FOTOS.forEach((src, i) => {
     const item = document.createElement('div');
     item.className = 'photo-item loading';
@@ -424,22 +459,32 @@ const EDICAO = {
     num.className = 'photo-num';
     num.textContent = String(i + 1).padStart(2, '0') + '/' + String(FOTOS.length).padStart(2, '0');
 
+    const dl = document.createElement('a');
+    dl.className = 'download-btn';
+    dl.href = src;
+    dl.download = '';
+    dl.title = 'Baixar foto';
+    dl.innerHTML = dlIcon;
+    dl.addEventListener('click', (e) => e.stopPropagation());
+
     item.appendChild(img);
     item.appendChild(num);
+    item.appendChild(dl);
     item.addEventListener('click', () => openLightbox(i));
     grid.appendChild(item);
   });
 
-  /* ── Lightbox ── */
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCounter = document.getElementById('lbCounter');
+  const lbDownload = document.getElementById('lbDownload');
   let currentIdx = 0;
 
   function openLightbox(idx) {
     currentIdx = idx;
     lbImg.src = FOTOS[idx];
     lbCounter.textContent = (idx + 1) + ' / ' + FOTOS.length;
+    lbDownload.href = FOTOS[idx];
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -453,6 +498,7 @@ const EDICAO = {
     currentIdx = (currentIdx + dir + FOTOS.length) % FOTOS.length;
     lbImg.src = FOTOS[currentIdx];
     lbCounter.textContent = (currentIdx + 1) + ' / ' + FOTOS.length;
+    lbDownload.href = FOTOS[currentIdx];
   }
 
   document.getElementById('lbClose').addEventListener('click', closeLightbox);
@@ -460,7 +506,6 @@ const EDICAO = {
   document.getElementById('lbNext').addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
-  /* Teclado */
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
@@ -468,7 +513,6 @@ const EDICAO = {
     if (e.key === 'ArrowRight') navigate(1);
   });
 
-  /* Swipe no mobile */
   let touchStartX = 0;
   lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
   lightbox.addEventListener('touchend', (e) => {
