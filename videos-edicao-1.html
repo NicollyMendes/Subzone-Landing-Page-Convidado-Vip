@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subzone #001 — Vídeos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vermelho-pressao: #F1120D;
+      --preto-subsolo: #030405;
+      --grafite-industrial: #121516;
+      --concreto-frio: #2B3032;
+      --vermelho-sangue-seco: #8A0B08;
+      --vermelho-glow: #FF1A12;
+      --cinza-metal-queimado: #5C6264;
+      --off-white-sujo: #D7D2C8;
+      --cinza-ruido: #8B8A84;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--preto-subsolo);
+      color: var(--off-white-sujo);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ═══ HEADER ═══ */
+    .gal-header {
+      position: relative;
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(241, 18, 13, 0.15);
+      overflow: hidden;
+    }
+    .gal-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(241, 18, 13, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cinza-ruido);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s;
+    }
+    .back-link:hover { color: var(--vermelho-glow); }
+    .back-link svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    .gal-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      letter-spacing: 0.06em;
+      color: var(--off-white-sujo);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .gal-title span { color: var(--vermelho-pressao); }
+
+    .gal-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--cinza-metal-queimado);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .gal-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cinza-ruido);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .gal-meta .count { color: var(--vermelho-pressao); font-weight: 600; }
+
+    /* ═══ VIDEO GRID ═══ */
+    .video-grid {
+      display: grid;
+      gap: 1.5rem;
+      padding: 2rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 700px) {
+      .video-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .video-card {
+      background: var(--grafite-industrial);
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .video-card:hover {
+      border-color: rgba(241, 18, 13, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Featured = largura total */
+    .video-card.featured {
+      grid-column: 1 / -1;
+    }
+
+    /* ═══ VIDEO CONTAINER (16:9) ═══ */
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Thumbnail */
+    .video-wrap img.thumb {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s, filter 0.4s;
+      filter: brightness(0.7);
+    }
+    .video-card:hover .video-wrap img.thumb {
+      transform: scale(1.04);
+      filter: brightness(0.85);
+    }
+
+    /* Auto-thumb (primeiro frame do vídeo, quando não tem thumb) */
+    .video-wrap video.auto-thumb {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7);
+      pointer-events: none;
+    }
+
+    /* Play button */
+    .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px; height: 64px;
+      background: rgba(241, 18, 13, 0.9);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      z-index: 2;
+    }
+    .play-btn:hover {
+      background: var(--vermelho-glow);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .play-btn svg {
+      width: 24px; height: 24px;
+      fill: white;
+      margin-left: 3px;
+    }
+
+    /* Duração */
+    .video-duration {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: white;
+      background: rgba(0,0,0,0.7);
+      padding: 2px 7px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      z-index: 2;
+    }
+
+    /* ═══ VIDEO INFO ═══ */
+    .video-info {
+      padding: 1rem 1.25rem;
+    }
+    .video-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      color: var(--off-white-sujo);
+      margin-bottom: 0.15rem;
+    }
+    .video-info p {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cinza-ruido);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ═══ VIDEO MODAL (fullscreen player) ═══ */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(3, 4, 5, 0.97);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .video-modal.active { display: flex; }
+
+    .modal-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .modal-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .modal-video-wrap video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .modal-close svg {
+      width: 24px; height: 24px;
+      stroke: var(--off-white-sujo);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition: stroke 0.2s;
+    }
+    .modal-close:hover svg { stroke: var(--vermelho-glow); }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--off-white-sujo);
+      letter-spacing: 0.04em;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ═══ EMPTY STATE ═══ */
+    .empty-state {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .empty-state .icon {
+      width: 48px; height: 48px;
+      stroke: var(--cinza-metal-queimado);
+      fill: none; stroke-width: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .empty-state p {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cinza-metal-queimado);
+      letter-spacing: 0.05em;
+    }
+
+    /* ═══ FOOTER ═══ */
+    .gal-footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      border-top: 1px solid rgba(241, 18, 13, 0.1);
+    }
+    .gal-footer a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--cinza-ruido);
+      text-decoration: none;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .gal-footer a:hover { color: var(--vermelho-glow); }
+  </style>
+</head>
+<body>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   ★★★  CONFIGURAÇÃO DOS VÍDEOS — EDITE AQUI  ★★★
+   
+   Coloque os vídeos na pasta "videos/edicao1/" e adicione aqui.
+   
+   Cada vídeo:
+   {
+     titulo:   "Nome do vídeo",
+     desc:     "Descrição curta",
+     src:      "videos/edicao1/aftermovie.mp4",
+     thumb:    "fotos/edicao1/thumb-aftermovie.jpg",   ← opcional
+     duracao:  "3:24",                                  ← opcional
+     featured: true,                                    ← opcional (largura total)
+   }
+   
+   Se não colocar thumb, ele usa o primeiro frame do vídeo.
+   Se não colocar duracao, não mostra a tag de tempo.
+   
+   EXEMPLO:
+   
+   const VIDEOS = [
+     { titulo: "Aftermovie — Subzone #001", desc: "O registro completo", src: "videos/edicao1/aftermovie.mp4", thumb: "fotos/edicao1/thumb-after.jpg", duracao: "4:12", featured: true },
+     { titulo: "Highlights", desc: "Os melhores momentos", src: "videos/edicao1/highlights.mp4", duracao: "1:30" },
+     { titulo: "Live Set — DJ Nome", desc: "Performance ao vivo", src: "videos/edicao1/liveset.mp4", duracao: "8:45" },
+   ];
+   
+   ══════════════════════════════════════════════════════════════ */
+
+const VIDEOS = [
+  // ← Cole seus vídeos aqui
+];
+
+const EDICAO = {
+  numero: "#001",
+  nome: "A Primeira Descida",
+  data: "2026",
+  local: "Cuiabá — MT",
+};
+</script>
+
+<!-- HEADER -->
+<header class="gal-header">
+  <a href="index.html#gallery" class="back-link">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+    Voltar ao site
+  </a>
+  <h1 class="gal-title">VÍDEOS <span id="edicaoNum"></span></h1>
+  <p class="gal-subtitle" id="edicaoNome"></p>
+  <div class="gal-meta">
+    <span id="metaLocal"></span>
+    <span>—</span>
+    <span id="metaData"></span>
+    <span>—</span>
+    <span><span class="count" id="videoCount">0</span> vídeos</span>
+  </div>
+</header>
+
+<!-- GRID -->
+<main class="video-grid" id="videoGrid"></main>
+
+<!-- EMPTY STATE -->
+<div class="empty-state" id="emptyState" style="display: none;">
+  <svg class="icon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+  <p>Vídeos em breve — fique no aguardo.</p>
+</div>
+
+<!-- MODAL PLAYER -->
+<div class="video-modal" id="videoModal">
+  <div class="modal-inner">
+    <button class="modal-close" id="modalClose">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-video-wrap">
+      <video id="modalVideo" controls playsinline></video>
+    </div>
+    <p class="modal-title" id="modalTitle"></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="gal-footer">
+  <a href="index.html#gallery">← Voltar para o site</a>
+</footer>
+
+<script>
+(() => {
+  /* ── Header ── */
+  document.getElementById('edicaoNum').textContent = EDICAO.numero;
+  document.getElementById('edicaoNome').textContent = EDICAO.nome;
+  document.getElementById('metaLocal').textContent = EDICAO.local;
+  document.getElementById('metaData').textContent = EDICAO.data;
+
+  const grid = document.getElementById('videoGrid');
+  const emptyState = document.getElementById('emptyState');
+  const countEl = document.getElementById('videoCount');
+
+  if (!VIDEOS.length) {
+    grid.style.display = 'none';
+    emptyState.style.display = 'block';
+    return;
+  }
+
+  countEl.textContent = VIDEOS.length;
+
+  /* ── Renderiza cards ── */
+  VIDEOS.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'video-card' + (v.featured ? ' featured' : '');
+
+    const wrap = document.createElement('div');
+    wrap.className = 'video-wrap';
+
+    if (v.thumb) {
+      /* Thumbnail manual */
+      const img = document.createElement('img');
+      img.className = 'thumb';
+      img.src = v.thumb;
+      img.alt = v.titulo;
+      img.loading = 'lazy';
+      wrap.appendChild(img);
+    } else {
+      /* Auto-thumb: mostra primeiro frame do vídeo */
+      const vid = document.createElement('video');
+      vid.className = 'auto-thumb';
+      vid.src = v.src + '#t=0.5';
+      vid.preload = 'metadata';
+      vid.muted = true;
+      wrap.appendChild(vid);
+    }
+
+    /* Play button */
+    const playBtn = document.createElement('button');
+    playBtn.className = 'play-btn';
+    playBtn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>';
+    playBtn.setAttribute('aria-label', 'Reproduzir ' + v.titulo);
+    wrap.appendChild(playBtn);
+
+    /* Duração */
+    if (v.duracao) {
+      const dur = document.createElement('span');
+      dur.className = 'video-duration';
+      dur.textContent = v.duracao;
+      wrap.appendChild(dur);
+    }
+
+    wrap.addEventListener('click', () => openModal(v));
+    card.appendChild(wrap);
+
+    /* Info */
+    const info = document.createElement('div');
+    info.className = 'video-info';
+
+    const title = document.createElement('h3');
+    title.textContent = v.titulo;
+    info.appendChild(title);
+
+    if (v.desc) {
+      const desc = document.createElement('p');
+      desc.textContent = v.desc;
+      info.appendChild(desc);
+    }
+
+    card.appendChild(info);
+    grid.appendChild(card);
+  });
+
+  /* ── Modal ── */
+  const modal = document.getElementById('videoModal');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalTitle = document.getElementById('modalTitle');
+
+  function openModal(v) {
+    modalVideo.src = v.src;
+    modalTitle.textContent = v.titulo;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    modalVideo.play();
+  }
+
+  function closeModal() {
+    modalVideo.pause();
+    modalVideo.removeAttribute('src');
+    modalVideo.load();
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+})();
+</script>
+</body>
+</html>

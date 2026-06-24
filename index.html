@@ -181,20 +181,34 @@
     .mov-card p{font-family:var(--body);font-size:13px;color:var(--noise);line-height:1.8;font-weight:300}
     @media(min-width:768px){.mov-grid{grid-template-columns:1fr 1fr 1fr}}
 
-    /* ══ GALLERY ══ */
+    /* ══ GALLERY EDITIONS ══ */
     .gal-wrap{position:relative;z-index:1;background:var(--black)}
-    .gal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:36px}
-    .gal-item{aspect-ratio:1;background:var(--grafite);border:1px solid rgba(241,18,13,.06);border-radius:2px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;transition:all .3s}
-    .gal-item:hover{border-color:rgba(241,18,13,.3);box-shadow:0 0 20px rgba(241,18,13,.05)}
-    .gal-item::before{content:'foto';font-family:var(--mono);font-size:9px;color:rgba(92,98,100,.5);letter-spacing:2px;text-transform:uppercase}
-    .gal-item.wide{grid-column:span 2;aspect-ratio:2/1}
-    .gal-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
-    .gal-item:hover img{transform:scale(1.05)}
-    @media(min-width:768px){.gal-grid{grid-template-columns:repeat(3,1fr)}.gal-item.wide{grid-column:span 2}}
+    .gal-editions{display:grid;grid-template-columns:1fr;gap:24px;margin-top:36px}
+    @media(min-width:600px){.gal-editions{grid-template-columns:repeat(2,1fr)}}
+    .gal-edition{position:relative;border:1px solid rgba(241,18,13,.08);border-radius:3px;overflow:hidden;background:var(--grafite);transition:border-color .3s,transform .3s;text-decoration:none;display:block}
+    .gal-edition:hover{border-color:rgba(241,18,13,.25);transform:translateY(-3px)}
+    .ed-cover{position:relative;aspect-ratio:16/9;background:var(--concreto);overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .ed-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:brightness(.7) saturate(.85)}
+    .gal-edition:hover .ed-cover img{transform:scale(1.05);filter:brightness(.85) saturate(1)}
+    .ed-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .3s}
+    .gal-edition:hover .ed-icon{transform:translate(-50%,-50%) scale(1.1)}
+    .ed-icon-photo{background:rgba(241,18,13,.12);border:1px solid rgba(241,18,13,.25)}
+    .ed-icon-video{background:rgba(241,18,13,.85)}
+    .ed-icon svg{width:20px;height:20px}
+    .ed-icon-photo svg{stroke:var(--red);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ed-icon-video svg{fill:#fff;stroke:none;margin-left:2px}
+    .ed-info{padding:16px 20px}
+    .ed-tag{font-family:var(--mono);font-size:8px;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .ed-tag::before{content:'';width:8px;height:1px;background:var(--red)}
+    .ed-info h3{font-family:var(--display);font-size:22px;color:#fff;letter-spacing:4px;text-transform:uppercase;margin-bottom:2px}
+    .ed-info p{font-family:var(--mono);font-size:9px;color:var(--metal);letter-spacing:2px;text-transform:uppercase}
+    .ed-arrow{position:absolute;bottom:18px;right:18px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(241,18,13,.15);border-radius:50%;transition:all .3s}
+    .gal-edition:hover .ed-arrow{border-color:var(--red);background:rgba(241,18,13,.1)}
+    .ed-arrow svg{width:14px;height:14px;stroke:var(--metal);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+    .gal-edition:hover .ed-arrow svg{stroke:var(--red)}
 
     /* ══ LINEUP ══ */
     .lineup-wrap{position:relative;z-index:1;background:var(--grafite);overflow:hidden}
-    /* Decorative frequency bars on sides */
     .lineup-wrap .freq-side span{width:30px}
     .lineup-wrap .freq-side span:nth-child(1){animation-delay:0s}
     .lineup-wrap .freq-side span:nth-child(2){animation-delay:.15s}
@@ -377,12 +391,45 @@
     <div class="section">
       <div class="s-label">Galeria</div>
       <h2 class="s-title">O Registro<br>do Subsolo</h2>
-      <div class="gal-grid">
-        <div class="gal-item wide"></div>
-        <div class="gal-item"></div><div class="gal-item"></div>
-        <div class="gal-item"></div><div class="gal-item"></div>
-        <div class="gal-item wide"></div>
-        <div class="gal-item"></div><div class="gal-item"></div><div class="gal-item"></div>
+      <div class="s-divider"></div>
+      <p class="s-text">Cada edição capturada em imagem e vídeo. Escolha uma edição para mergulhar no registro.</p>
+
+      <div class="gal-editions">
+
+        <!-- FOTOS — EDIÇÃO 1 -->
+        <a href="galeria-edicao-1.html" class="gal-edition">
+          <div class="ed-cover">
+            <!-- Quando tiver uma foto de capa, descomente: -->
+            <!-- <img src="fotos/edicao1/capa.jpg" alt="Subzone #001"> -->
+            <div class="ed-icon ed-icon-photo">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+          </div>
+          <div class="ed-info">
+            <div class="ed-tag">Fotos</div>
+            <h3>Subzone #001</h3>
+            <p>A Primeira Descida — 2026</p>
+          </div>
+          <div class="ed-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+        </a>
+
+        <!-- VÍDEOS — EDIÇÃO 1 -->
+        <a href="videos-edicao-1.html" class="gal-edition">
+          <div class="ed-cover">
+            <!-- Quando tiver uma thumb de vídeo, descomente: -->
+            <!-- <img src="fotos/edicao1/thumb-video.jpg" alt="Vídeos Subzone #001"> -->
+            <div class="ed-icon ed-icon-video">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
+          <div class="ed-info">
+            <div class="ed-tag">Vídeos</div>
+            <h3>Subzone #001</h3>
+            <p>Aftermovie & Highlights</p>
+          </div>
+          <div class="ed-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+        </a>
+
       </div>
     </div>
   </div>
