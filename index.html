@@ -231,13 +231,18 @@
     .lineup-tag{font-family:var(--mono);font-size:9px;color:var(--metal);letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(92,98,100,.3);padding:4px 10px;border-radius:2px;white-space:nowrap}
 
     /* ══ SPONSORS ══ */
-    .spon-wrap{position:relative;z-index:1;background:var(--black)}
-    .spon-grid{display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap;margin-top:40px;max-width:800px;margin-left:auto;margin-right:auto}
-    .spon-logo{width:110px;height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(92,98,100,.25);border-radius:2px;opacity:.4;transition:all .3s}
-    .spon-logo:hover{opacity:.8;border-color:rgba(241,18,13,.2)}
-    .spon-logo span{font-family:var(--mono);font-size:8px;color:var(--metal);letter-spacing:1px;text-transform:uppercase}
-    .spon-logo img{max-width:80%;max-height:70%;object-fit:contain;filter:grayscale(1) brightness(.7);transition:filter .3s}
-    .spon-logo:hover img{filter:grayscale(0) brightness(1)}
+    .spon-wrap{position:relative;z-index:1;background:var(--black);overflow:hidden}
+    .spon-track-container{position:relative;margin-top:40px;overflow:hidden;padding:20px 0}
+    .spon-track-container::before,.spon-track-container::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+    .spon-track-container::before{left:0;background:linear-gradient(90deg,var(--black),transparent)}
+    .spon-track-container::after{right:0;background:linear-gradient(270deg,var(--black),transparent)}
+    .spon-track{display:flex;align-items:center;gap:60px;width:max-content;animation:spon-scroll 20s linear infinite}
+    .spon-track:hover{animation-play-state:paused}
+    .spon-logo{flex-shrink:0;width:280px;height:120px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(92,98,100,.2);border-radius:3px;padding:12px 20px;opacity:.5;transition:all .4s}
+    .spon-logo:hover{opacity:1;border-color:rgba(241,18,13,.25)}
+    .spon-logo span{font-family:var(--mono);font-size:9px;color:var(--metal);letter-spacing:1px;text-transform:uppercase}
+    .spon-logo img{max-width:100%;max-height:100%;object-fit:contain;transition:opacity .4s}
+    @keyframes spon-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
     /* ══ FOOTER ══ */
     footer{position:relative;z-index:1;background:var(--grafite);border-top:1px solid rgba(241,18,13,.08);padding:48px 20px 32px}
@@ -350,7 +355,7 @@
         </div>
         <div class="about-img">
           <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div><div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
-          <!-- <img src="foto-subzone.jpg" alt="Subzone"> -->
+          <img src="fotos/edicao1/sobre.png" alt="Subzone">
         </div>
       </div>
     </div>
@@ -400,7 +405,7 @@
         <a href="galeria-edicao-1.html" class="gal-edition">
           <div class="ed-cover">
             <!-- Quando tiver uma foto de capa, descomente: -->
-            <!-- <img src="fotos/edicao1/capa.jpg" alt="Subzone #001"> -->
+            <img src="fotos/edicao1/foto.png" alt="Subzone #001">
             <div class="ed-icon ed-icon-photo">
               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             </div>
@@ -417,7 +422,7 @@
         <a href="videos-edicao-1.html" class="gal-edition">
           <div class="ed-cover">
             <!-- Quando tiver uma thumb de vídeo, descomente: -->
-            <!-- <img src="fotos/edicao1/thumb-video.jpg" alt="Vídeos Subzone #001"> -->
+            <img src="fotos/edicao1/video.png" alt="Vídeos Subzone #001">
             <div class="ed-icon ed-icon-video">
               <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
             </div>
@@ -454,19 +459,22 @@
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">GAB!</span><div class="lineup-eq"><div class="eq"><span></span><span></span><span></span><span></span><span></span></div></div></div><div style="display:flex;align-items:center;gap:12px"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/gabiluzmusic" target="_blank" rel="noopener" style="color:var(--metal);transition:color .25s" onmouseover="this.style.color='#F1120D'" onmouseout="this.style.color=''"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
       </div>
   </div>
+</div>
 
   <!-- SPONSORS -->
   <div class="spon-wrap" id="sponsors">
     <div class="section" style="text-align:center">
       <div class="s-label" style="justify-content:center"><span></span></div>
       <h2 class="s-title">Quem Apoia o<br>Movimento</h2>
-      <div class="spon-grid">
-        <div class="spon-logo"><span>Parceiro 1</span></div>
-        <div class="spon-logo"><span>Parceiro 2</span></div>
-        <div class="spon-logo"><span>Parceiro 3</span></div>
-        <div class="spon-logo"><span>Parceiro 4</span></div>
-        <div class="spon-logo"><span>Parceiro 5</span></div>
-        <div class="spon-logo"><span>Parceiro 6</span></div>
+      <div class="spon-track-container">
+        <div class="spon-track">
+          <div class="spon-logo"><img src="fotos/parceiros/almt-wilson-santos.png" alt="ALMT — Wilson Santos"></div>
+          <div class="spon-logo"><img src="fotos/parceiros/almt-wilson-santos.png" alt="ALMT — Wilson Santos"></div>
+          <div class="spon-logo"><img src="fotos/parceiros/almt-wilson-santos.png" alt="ALMT — Wilson Santos"></div>
+          <div class="spon-logo"><img src="fotos/parceiros/almt-wilson-santos.png" alt="ALMT — Wilson Santos"></div>
+          <div class="spon-logo"><img src="fotos/parceiros/almt-wilson-santos.png" alt="ALMT — Wilson Santos"></div>
+          <div class="spon-logo"><img src="fotos/parceiros/almt-wilson-santos.png" alt="ALMT — Wilson Santos"></div>
+        </div>
       </div>
     </div>
   </div>
