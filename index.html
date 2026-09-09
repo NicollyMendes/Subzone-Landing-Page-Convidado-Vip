@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
   <style>
     @font-face {
       font-family: 'Komet';
@@ -103,18 +104,13 @@
     .hero-logo {
       width: clamp(280px, 50vw, 600px);
       height: auto;
-    }
-    /* Hero entrance */
-    .hero-logo {
-      width: clamp(280px, 50vw, 600px);
-      height: auto;
       opacity: 0;
       animation: fade-up 1s cubic-bezier(.16,1,.3,1) .3s forwards;
     }
     .hero-tagline {
       margin-top: 20px;
       font-size: 12px; font-weight: 500;
-      color:#FFF;
+      color: #fff;
       letter-spacing: 8px;
       text-transform: uppercase;
     }
@@ -136,7 +132,6 @@
     .ne-row {
       display: flex; align-items: baseline;
       flex-wrap: wrap; gap: 12px 28px;
-      margin-bottom: 24px;
     }
     .ne-date {
       font-family: var(--display);
@@ -151,27 +146,6 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .ne-divider { height: 1px; background: var(--light-gray); margin-bottom: 16px; }
-    .ne-djs {
-      display: flex; flex-wrap: wrap; gap: 6px 20px;
-      align-items: center;
-    }
-    .ne-dj {
-      font-size: 12px; font-weight: 500;
-      color: var(--gunmetal);
-      text-transform: uppercase; letter-spacing: 1px;
-    }
-    .ne-dj-headliner { font-weight: 700; color: var(--red); }
-    .ne-lineup-link {
-      margin-left: auto;
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 10px; font-weight: 600;
-      color: var(--gunmetal);
-      letter-spacing: 1.5px; text-transform: uppercase;
-      transition: color .2s;
-    }
-    .ne-lineup-link:hover { color: var(--red); }
-    .ne-lineup-link svg { width: 11px; height: 11px; }
     @media (max-width: 768px) {
       .next-event { padding: 32px 20px; }
     }
@@ -193,7 +167,7 @@
     }
     .cd-l {
       font-size: 8px; font-weight: 500;
-      color: #fff ; letter-spacing: 2px;
+      color: #fff; letter-spacing: 2px;
       text-transform: uppercase; margin-top: 4px;
     }
     .cd-s {
@@ -254,9 +228,7 @@
     /* ── MOVEMENT ── */
     .mov-wrap { background: var(--dark-gray); }
     .mov-grid { display: grid; grid-template-columns: 1fr; gap: 1px; margin-top: 40px; background: rgba(255,255,255,.06); }
-    .mov-card {
-      padding: 32px 28px; background: var(--dark-gray);
-    }
+    .mov-card { padding: 32px 28px; background: var(--dark-gray); }
     .mov-card h3 {
       font-family: var(--display);
       font-size: 18px; font-weight: 800; color: var(--off-white);
@@ -266,136 +238,104 @@
     .mov-card p { font-size: 13px; color: var(--light-gray); line-height: 1.8; }
     @media (min-width: 768px) { .mov-grid { grid-template-columns: 1fr 1fr 1fr; } }
 
+    /* ── HIGHLINER ── */
+    .hl-wrap {
+      background: var(--black);
+      border-top: 1px solid rgba(224,0,0,.15);
+      border-bottom: 1px solid rgba(224,0,0,.15);
+    }
+    .hl-header { display: flex; align-items: center; gap: 16px; margin-bottom: 48px; }
+    .hl-code { font-size: 10px; font-weight: 600; color: var(--red); letter-spacing: 3px; text-transform: uppercase; }
+    .hl-divider { flex: 1; height: 1px; background: rgba(224,0,0,.2); }
+    .hl-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800;
+      color: #fff; letter-spacing: 3px; text-transform: uppercase;
+      line-height: .95; margin-bottom: 28px;
+    }
+    .hl-body { max-width: 560px; margin-bottom: 60px; }
+    .hl-body p { font-size: 14px; color: var(--gray); line-height: 1.9; margin-bottom: 12px; }
+    /* 3D viewer */
+    .hl-3d { margin-bottom: 72px; }
+    .hl-3d-viewer {
+      width: 100%; max-width: 500px;
+      aspect-ratio: 1/1;
+      margin: 0 auto;
+    }
+    .hl-3d-viewer model-viewer {
+      width: 100%; height: 100%;
+      --poster-color: transparent;
+    }
+    /* Primeiro Highliner */
+    .hl-first {
+      margin-bottom: 48px; padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .hl-first-code { font-size: 10px; font-weight: 600; color: var(--red); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+    .hl-first-name {
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 800;
+      color: #fff; letter-spacing: 4px; text-transform: uppercase;
+      line-height: .9; margin-bottom: 20px;
+    }
+    .hl-first-desc { font-size: 14px; color: var(--gray); line-height: 1.9; max-width: 560px; }
+    .hl-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 60px; }
+    .hl-photo { aspect-ratio: 3/2; background: var(--dark-gray); overflow: hidden; }
+    .hl-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(.85); transition: transform .5s ease, filter .4s;
+    }
+    .hl-photo:hover img { transform: scale(1.04); filter: brightness(1); }
+    @media (max-width: 500px) { .hl-gallery { grid-template-columns: 1fr; } }
+    .hl-signal { font-size: 9px; font-weight: 500; color: rgba(255,255,255,.1); letter-spacing: 4px; text-transform: uppercase; }
+
     /* ── GALLERY ── */
     .gal-wrap { background: var(--light-gray); }
     .gal-wrap .s-title { color: var(--black); }
     .gal-wrap .s-text { color: var(--gunmetal); }
     .gal-editions { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
     @media (min-width: 600px) { .gal-editions { grid-template-columns: repeat(2, 1fr); } }
-    .gal-edition {
-      display: block; overflow: hidden;
-      background: #fff;
-      transition: opacity .3s;
-    }
+    .gal-edition { display: block; overflow: hidden; background: #fff; transition: opacity .3s; }
     .gal-edition:hover { opacity: .85; }
     .ed-cover { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-    .ed-cover img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .6s ease;
-    }
+    .ed-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
     .gal-edition:hover .ed-cover img { transform: scale(1.03); }
     .ed-info { padding: 16px 20px; }
-    .ed-tag {
-      font-size: 9px; font-weight: 600;
-      color: var(--red); letter-spacing: 2px;
-      text-transform: uppercase; margin-bottom: 6px;
-    }
-    .ed-info h3 {
-      font-family: var(--display);
-      font-size: 18px; font-weight: 800; color: var(--black);
-      letter-spacing: 2px; text-transform: uppercase;
-    }
-    .ed-info p {
-      font-size: 11px; font-weight: 500;
-      color: var(--gunmetal); letter-spacing: 1px;
-      text-transform: uppercase; margin-top: 2px;
-    }
+    .ed-tag { font-size: 9px; font-weight: 600; color: var(--red); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .ed-info h3 { font-family: var(--display); font-size: 18px; font-weight: 800; color: var(--black); letter-spacing: 2px; text-transform: uppercase; }
+    .ed-info p { font-size: 11px; font-weight: 500; color: var(--gunmetal); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
     /* ── LINEUP ── */
     .lineup-wrap { background: var(--graphite); }
     .lineup-list { margin-top: 40px; border-top: 1px solid rgba(255,255,255,.06); }
-    .lineup-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-    }
+    .lineup-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
     .lineup-left { display: flex; align-items: center; gap: 12px; }
-    .lineup-name {
-      font-family: var(--display);
-      font-size: clamp(18px, 3.5vw, 28px);
-      font-weight: 800; color: #fff;
-      letter-spacing: 3px; text-transform: uppercase;
-      transition: color .2s;
-    }
+    .lineup-name { font-family: var(--display); font-size: clamp(18px, 3.5vw, 28px); font-weight: 800; color: #fff; letter-spacing: 3px; text-transform: uppercase; transition: color .2s; }
     .lineup-item:hover .lineup-name { color: var(--red); }
     .lineup-right { display: flex; align-items: center; gap: 12px; }
-    .lineup-tag {
-      font-size: 9px; font-weight: 500;
-      color: var(--gunmetal); letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+    .lineup-tag { font-size: 9px; font-weight: 500; color: var(--gunmetal); letter-spacing: 2px; text-transform: uppercase; }
     .lineup-ig { color: var(--gunmetal); transition: color .2s; }
     .lineup-ig:hover { color: var(--red); }
     .lineup-ig svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-    .lineup-headliner { padding: 20px 0; }
-    .lineup-headliner .lineup-name { color: var(--red); font-size: clamp(24px, 5vw, 36px); }
-    .lineup-headliner .lineup-tag { color: var(--red); }
-
     /* ── FOOTER ── */
-    footer {
-      background: var(--black);
-      border-top: 1px solid rgba(255,255,255,.04);
-      padding: 48px 48px 32px;
-    }
+    footer { background: var(--black); border-top: 1px solid rgba(255,255,255,.04); padding: 48px 48px 32px; }
     .foot-inner { max-width: 1100px; margin: 0 auto; }
-    .foot-top {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; flex-wrap: wrap; gap: 32px;
-      margin-bottom: 32px;
-    }
-    .foot-brand-name {
-      font-family: var(--display);
-      font-size: 18px; font-weight: 800;
-      color: #fff; letter-spacing: 4px;
-      margin-bottom: 8px;
-    }
-    .foot-brand p {
-      font-size: 10px; color: var(--gunmetal);
-      letter-spacing: 1px; text-transform: uppercase; line-height: 2.2;
-    }
+    .foot-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 32px; }
+    .foot-brand p { font-size: 10px; color: var(--gunmetal); letter-spacing: 1px; text-transform: uppercase; line-height: 2.2; }
     .foot-brand .r { color: var(--red); }
-    .foot-social a {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 10px; color: var(--gunmetal);
-      letter-spacing: 1px; text-transform: uppercase;
-      transition: color .2s;
-    }
+    .foot-social a { display: flex; align-items: center; gap: 8px; font-size: 10px; color: var(--gunmetal); letter-spacing: 1px; text-transform: uppercase; transition: color .2s; }
     .foot-social a:hover { color: var(--red); }
     .foot-social svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-    .foot-bar {
-      border-top: 1px solid rgba(255,255,255,.04);
-      padding-top: 20px;
-    }
-    .foot-bar p {
-      font-size: 9px; color: rgba(255,255,255,.15);
-      letter-spacing: 1px; text-transform: uppercase;
-    }
-    /* ── ANIMATIONS ── */
+    .foot-bar { border-top: 1px solid rgba(255,255,255,.04); padding-top: 20px; }
+    .foot-bar p { font-size: 9px; color: rgba(255,255,255,.15); letter-spacing: 1px; text-transform: uppercase; }
 
-    /* Scroll reveal base */
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
-    }
-    [data-reveal].is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    [data-reveal="left"] { transform: translateX(-40px) translateY(0); }
-    [data-reveal="left"].is-visible { transform: translateX(0); }
+    /* ── ANIMATIONS ── */
+    [data-reveal] { opacity: 0; transform: translateY(32px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
     [data-reveal="right"] { transform: translateX(40px) translateY(0); }
     [data-reveal="right"].is-visible { transform: translateX(0); }
-    [data-reveal="scale"] { transform: scale(.92); }
-    [data-reveal="scale"].is-visible { transform: scale(1); }
-
-    /* Stagger children */
-    [data-stagger] > * {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
-    }
+    [data-stagger] > * { opacity: 0; transform: translateY(24px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
     [data-stagger].is-visible > * { opacity: 1; transform: translateY(0); }
     [data-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms; }
     [data-stagger].is-visible > *:nth-child(2) { transition-delay: 80ms; }
@@ -406,58 +346,20 @@
     [data-stagger].is-visible > *:nth-child(7) { transition-delay: 480ms; }
     [data-stagger].is-visible > *:nth-child(8) { transition-delay: 560ms; }
     [data-stagger].is-visible > *:nth-child(9) { transition-delay: 640ms; }
-
-    .hero-tagline {
-      opacity: 0;
-      animation: fade-up .8s cubic-bezier(.16,1,.3,1) .8s forwards;
-    }
-    .hero-cd {
-      opacity: 0;
-      animation: fade-up .8s cubic-bezier(.16,1,.3,1) 1.1s forwards;
-    }
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Gallery card tilt */
-    .gal-edition {
-      transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .3s;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    /* Lineup items slide-in */
-    .lineup-list [data-reveal] {
-      transform: translateX(-20px);
-    }
-    .lineup-list [data-reveal].is-visible {
-      transform: translateX(0);
-    }
-
-    /* Nav hide on scroll down, show on scroll up */
+    [data-stagger].is-visible > *:nth-child(10) { transition-delay: 720ms; }
+    [data-stagger].is-visible > *:nth-child(11) { transition-delay: 800ms; }
+    .hero-tagline { opacity: 0; animation: fade-up .8s cubic-bezier(.16,1,.3,1) .8s forwards; }
+    .hero-cd { opacity: 0; animation: fade-up .8s cubic-bezier(.16,1,.3,1) 1.1s forwards; }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .gal-edition { transition: transform .4s cubic-bezier(.16,1,.3,1), opacity .3s; transform-style: preserve-3d; will-change: transform; }
     .nav { transition: background .4s, transform .35s cubic-bezier(.16,1,.3,1); }
     .nav.nav-hidden { transform: translateY(-100%); }
-
-    /* Magnetic button effect */
-    .magnetic { transition: transform .25s cubic-bezier(.16,1,.3,1); }
-
-    /* Smooth counter */
-    .count-up { display: inline-block; }
-
-    /* Parallax on about image */
     .about-img img { transition: transform .1s linear; }
-
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       [data-reveal], [data-stagger] > * { opacity: 1; transform: none; }
       .hero-logo, .hero-tagline, .hero-cd { opacity: 1; }
     }
-
     @media (max-width: 768px) { footer { padding: 32px 20px 24px; } }
   </style>
 </head>
@@ -512,7 +414,7 @@
           </div>
         </div>
         <div class="about-img" data-reveal="right">
-          <img src="fotos/edicao1/sobre.png" alt="Subzone">
+          <img src="fotos/edicao1/sobre.jpeg" alt="Subzone">
         </div>
       </div>
     </div>
@@ -523,19 +425,52 @@
       <div class="s-label" data-reveal>O Movimento</div>
       <h2 class="s-title" data-reveal>Bass Culture Below the Surface</h2>
       <div class="mov-grid" data-stagger>
-        <div class="mov-card">
-          <h3>O Som</h3>
-          <p>Techno, bass music, dubstep, drum & bass — os gêneros que fazem o chão tremer. A curadoria é cirúrgica.</p>
-        </div>
-        <div class="mov-card">
-          <h3>A Comunidade</h3>
-          <p>Subzone é feita por quem frequenta. Respeito, energia e vontade de fazer parte de algo que importa.</p>
-        </div>
-        <div class="mov-card">
-          <h3>A Experiência</h3>
-          <p>Sound system calibrado, fumaça e a sensação de estar dentro de algo único. Do primeiro passo até o último drop.</p>
+        <div class="mov-card"><h3>O Som</h3><p>Techno, bass music, dubstep, drum & bass — os gêneros que fazem o chão tremer. A curadoria é cirúrgica.</p></div>
+        <div class="mov-card"><h3>A Comunidade</h3><p>Subzone é feita por quem frequenta. Respeito, energia e vontade de fazer parte de algo que importa.</p></div>
+        <div class="mov-card"><h3>A Experiência</h3><p>Sound system calibrado, fumaça e a sensação de estar dentro de algo único. Do primeiro passo até o último drop.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hl-wrap" id="highliner">
+    <div class="section">
+      <div class="hl-header" data-reveal>
+        <span class="hl-code">SUBZONE ARCHIVE</span>
+        <span class="hl-divider"></span>
+        <span class="hl-code">HIGHLINER</span>
+      </div>
+      <h2 class="hl-title" data-reveal>O Que É o<br>Highliner?</h2>
+      <div class="hl-body" data-reveal>
+        <p>O Highliner é um reconhecimento criado pela Subzone para destacar artistas que vão além da performance. Não é sobre tocar bem ou movimentar uma pista. É sobre quem carrega identidade, presença, evolução artística e contribuição real para a cultura que existe ao redor da música.</p>
+        <p>Cada Highliner vira parte do acervo permanente da Subzone. Um registro cultural da marca e da cena.</p>
+      </div>
+      <div class="hl-3d" data-reveal>
+        <div class="hl-3d-viewer">
+          <model-viewer
+          src="./trofeu-subzone.glb"
+          camera-controls
+          rotation-per-second="30deg"
+          interaction-prompt="auto"
+          shadow-intensity="0.3"
+          exposure="1.2"
+          camera-orbit="45deg 65deg auto"
+          environment-image="neutral"
+          style="background-color: transparent; width: 100%; height: 500px;"
+        ></model-viewer>
         </div>
       </div>
+      <div class="hl-first" data-reveal>
+        <div class="hl-first-code">HIGHLINER 001</div>
+        <h3 class="hl-first-name">Sámon Pessoa</h3>
+        <p class="hl-first-desc">O primeiro nome reconhecido pela Subzone como parte do movimento. Sua presença de palco, personalidade artística, conexão com o público e constante evolução fizeram com que ele se destacasse não apenas como DJ, mas como alguém que ajuda a fortalecer e movimentar a cena.</p>
+      </div>
+      <div class="hl-gallery" data-stagger>
+        <div class="hl-photo"><img src="fotos/highliner/samon-01.PNG" alt="Sámon Pessoa"></div>
+        <div class="hl-photo"><img src="fotos/highliner/samon-02.jpeg" alt="Sámon Pessoa"></div>
+        <div class="hl-photo"><img src="fotos/highliner/samon-03.jpg" alt="Sámon Pessoa"></div>
+        <div class="hl-photo"><img src="fotos/highliner/samon-04.jpg" alt="Sámon Pessoa"></div>
+      </div>
+      <div class="hl-signal" data-reveal>SIGNAL — 001</div>
     </div>
   </div>
 
@@ -544,30 +479,9 @@
       <div class="s-label" data-reveal>Galeria</div>
       <h2 class="s-title" data-reveal>Registro</h2>
       <div class="gal-editions" data-stagger>
-        <a href="galeria-edicao-1.html" class="gal-edition">
-          <div class="ed-cover"><img src="fotos/edicao1/foto.png" alt="Subzone #001"></div>
-          <div class="ed-info">
-            <div class="ed-tag">Fotos</div>
-            <h3>Subzone #001</h3>
-            <p>A Primeira Descida — 2026</p>
-          </div>
-        </a>
-        <a href="galeria-edicao-2.html" class="gal-edition">
-          <div class="ed-cover"><img src="fotos/edicao2/foto.png" alt="Subzone #002"></div>
-          <div class="ed-info">
-            <div class="ed-tag">Fotos</div>
-            <h3>Subzone #002</h3>
-            <p>Segunda Edição — 2026</p>
-          </div>
-        </a>
-        <a href="galeria-edicao-3.html" class="gal-edition">
-          <div class="ed-cover"><img src="fotos/edicao3/foto.png" alt="Subzone #003"></div>
-          <div class="ed-info">
-            <div class="ed-tag">Fotos</div>
-            <h3>Subzone #003</h3>
-            <p>Terceira Edição — 2026</p>
-          </div>
-        </a>
+        <a href="galeria-edicao-1.html" class="gal-edition"><div class="ed-cover"><img src="fotos/edicao1/foto001.PNG" alt="Subzone #001"></div><div class="ed-info"><div class="ed-tag">Fotos</div><h3>Subzone #001</h3><p>A Primeira Descida — 2026</p></div></a>
+        <a href="galeria-edicao-2.html" class="gal-edition"><div class="ed-cover"><img src="fotos/edicao2/foto002.PNG" alt="Subzone #002"></div><div class="ed-info"><div class="ed-tag">Fotos</div><h3>Subzone #002</h3><p>Segunda Edição — 2026</p></div></a>
+        <a href="galeria-edicao-3.html" class="gal-edition"><div class="ed-cover"><img src="fotos/edicao3/foto003.PNG" alt="Subzone #003"></div><div class="ed-info"><div class="ed-tag">Fotos</div><h3>Subzone #003</h3><p>Terceira Edição — 2026</p></div></a>
       </div>
     </div>
   </div>
@@ -579,7 +493,6 @@
       <div class="lineup-list" data-stagger>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">Sámon Pessoa</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/samonpessoa" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">DoisL</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/odoisli" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
-        <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">S7venn</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/djs7venn" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">Boni & Geo</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/samonpessoa" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">Thales</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/thales_jf1" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">Mararza</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/mararza__" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
@@ -588,6 +501,7 @@
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">Lilo</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/djliloficial" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">WL</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/wender.alm" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
         <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">GAB!</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/gabiluzmusic" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
+        <div class="lineup-item"><div class="lineup-left"><span class="lineup-name">S7venn</span></div><div class="lineup-right"><span class="lineup-tag">DJ</span><a href="https://www.instagram.com/djs7venn" target="_blank" rel="noopener" class="lineup-ig"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></div></div>
       </div>
     </div>
   </div>
@@ -607,246 +521,39 @@
           </a>
         </div>
       </div>
-      <div class="foot-bar">
-        <p>© 2026 Subzone</p>
-      </div>
+      <div class="foot-bar"><p>© 2026 Subzone</p></div>
     </div>
   </footer>
 
   <script>
-    // ── Countdown ──
-    const EV = new Date('2026-11-01T02:00:00Z');
-    function tick() {
-      const d = EV - new Date(); if (d <= 0) return;
-      document.getElementById('cd-d').textContent = String(Math.floor(d / 864e5)).padStart(2, '0');
-      document.getElementById('cd-h').textContent = String(Math.floor((d % 864e5) / 36e5)).padStart(2, '0');
-      document.getElementById('cd-m').textContent = String(Math.floor((d % 36e5) / 6e4)).padStart(2, '0');
-      document.getElementById('cd-s').textContent = String(Math.floor((d % 6e4) / 1e3)).padStart(2, '0');
-    }
-    tick(); setInterval(tick, 1000);
+    const EV=new Date('2026-11-01T02:00:00Z');
+    function tick(){const d=EV-new Date();if(d<=0)return;document.getElementById('cd-d').textContent=String(Math.floor(d/864e5)).padStart(2,'0');document.getElementById('cd-h').textContent=String(Math.floor((d%864e5)/36e5)).padStart(2,'0');document.getElementById('cd-m').textContent=String(Math.floor((d%36e5)/6e4)).padStart(2,'0');document.getElementById('cd-s').textContent=String(Math.floor((d%6e4)/1e3)).padStart(2,'0')}
+    tick();setInterval(tick,1e3);
 
-    // ── Nav: scroll bg + hide/show on direction ──
-    const nav = document.getElementById('nav');
-    let lastY = 0;
-    window.addEventListener('scroll', () => {
-      const y = scrollY;
-      nav.classList.toggle('scrolled', y > 60);
-      if (y > 300) {
-        nav.classList.toggle('nav-hidden', y > lastY);
-      } else {
-        nav.classList.remove('nav-hidden');
-      }
-      lastY = y;
-    });
+    const nav=document.getElementById('nav');let lastY=0;
+    window.addEventListener('scroll',()=>{const y=scrollY;nav.classList.toggle('scrolled',y>60);if(y>300){nav.classList.toggle('nav-hidden',y>lastY)}else{nav.classList.remove('nav-hidden')}lastY=y});
 
-    // ── Nav mobile ──
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-    function closeNav() { navLinks.classList.remove('open'); }
+    const navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+    navToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+    function closeNav(){navLinks.classList.remove('open')}
 
-    // ── Scroll reveal (IntersectionObserver) ──
-    const revealEls = document.querySelectorAll('[data-reveal], [data-stagger]');
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          revealObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => revealObs.observe(el));
+    const revealEls=document.querySelectorAll('[data-reveal],[data-stagger]');
+    const revealObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');revealObs.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(el=>revealObs.observe(el));
 
-    // ── Count-up animation on stats ──
-    document.querySelectorAll('.about-stat .num').forEach(el => {
-      const text = el.textContent.trim();
-      const match = text.match(/^(\d+)/);
-      if (!match) return;
-      const target = parseInt(match[1]);
-      const suffix = text.replace(match[1], '');
-      el.textContent = '0' + suffix;
-      const obs = new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) {
-          obs.unobserve(el);
-          let start = 0;
-          const dur = 1200;
-          const t0 = performance.now();
-          function step(now) {
-            const p = Math.min((now - t0) / dur, 1);
-            const ease = 1 - Math.pow(1 - p, 3);
-            el.textContent = String(Math.round(ease * target)).padStart(2, '0') + suffix;
-            if (p < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        }
-      }, { threshold: 0.5 });
-      obs.observe(el);
-    });
+    document.querySelectorAll('.about-stat .num').forEach(el=>{const text=el.textContent.trim();const match=text.match(/^(\d+)/);if(!match)return;const target=parseInt(match[1]);const suffix=text.replace(match[1],'');el.textContent='0'+suffix;const obs=new IntersectionObserver(([e])=>{if(e.isIntersecting){obs.unobserve(el);const t0=performance.now();function step(now){const p=Math.min((now-t0)/1200,1);const ease=1-Math.pow(1-p,3);el.textContent=String(Math.round(ease*target)).padStart(2,'0')+suffix;if(p<1)requestAnimationFrame(step)}requestAnimationFrame(step)}},{threshold:.5});obs.observe(el)});
 
-    // ── Gallery card 3D tilt ──
-    document.querySelectorAll('.gal-edition').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(600px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale(1.02)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
+    document.querySelectorAll('.gal-edition').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`perspective(600px) rotateY(${x*6}deg) rotateX(${-y*6}deg) scale(1.02)`});card.addEventListener('mouseleave',()=>{card.style.transform=''})});
 
-    // ── About image parallax ──
-    const aboutImg = document.querySelector('.about-img img');
-    if (aboutImg) {
-      const wrap = aboutImg.closest('.about-wrap');
-      window.addEventListener('scroll', () => {
-        const r = wrap.getBoundingClientRect();
-        const vh = innerHeight;
-        if (r.top < vh && r.bottom > 0) {
-          const p = (vh - r.top) / (vh + r.height);
-          aboutImg.style.transform = `translateY(${(p - 0.5) * -30}px) scale(1.08)`;
-        }
-      }, { passive: true });
-    }
+    const aboutImg=document.querySelector('.about-img img');
+    if(aboutImg){const wrap=aboutImg.closest('.about-wrap');window.addEventListener('scroll',()=>{const r=wrap.getBoundingClientRect();const vh=innerHeight;if(r.top<vh&&r.bottom>0){const p=(vh-r.top)/(vh+r.height);aboutImg.style.transform=`translateY(${(p-.5)*-30}px) scale(1.08)`}},{passive:true})}
 
-    // ── Smooth scroll for anchor links ──
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
 
-    // ── Dithering Wave Shader (hero background) ──
-    (function() {
-      const canvas = document.getElementById('heroCanvas');
-      if (!canvas) return;
-      const gl = canvas.getContext('webgl2');
-      if (!gl) return;
+    // Dithering Wave Shader
+    (function(){const canvas=document.getElementById('heroCanvas');if(!canvas)return;const gl=canvas.getContext('webgl2');if(!gl)return;const VERT=`#version 300 es\nin vec2 position;out vec2 vUv;void main(){vUv=position*.5+.5;gl_Position=vec4(position,0,1);}`;const FRAG=`#version 300 es\nprecision highp float;in vec2 vUv;out vec4 fragColor;uniform vec2 u_res;uniform float u_time;uniform float u_pxSize;uniform vec3 u_colFront;uniform vec3 u_colBack;float bayer8(vec2 p){ivec2 c=ivec2(mod(p,8.0));int i=c.x+c.y*8;int b[64]=int[64](0,32,8,40,2,34,10,42,48,16,56,24,50,18,58,26,12,44,4,36,14,46,6,38,60,28,52,20,62,30,54,22,3,35,11,43,1,33,9,41,51,19,59,27,49,17,57,25,15,47,7,39,13,45,5,37,63,31,55,23,61,29,53,21);return float(b[i])/64.0;}vec3 perm(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}float snoise(vec2 v){const vec4 C=vec4(.211325,.366025,-.577350,.024390);vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1,0):vec2(0,1);vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);vec3 p=perm(perm(i.y+vec3(0,i1.y,1))+i.x+vec3(0,i1.x,1));vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);m=m*m;m=m*m;vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-.5;vec3 ox=floor(x+.5);vec3 a0=x-ox;m*=1.79284-.85373*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.0*dot(m,g);}void main(){vec2 uv=vUv;float ratio=u_res.x/u_res.y;vec2 p=uv-.5;p.x*=ratio;float t=u_time;float wave1=sin(p.x*3.0+t*.4+snoise(p*1.5+t*.1)*1.5)*.25;float wave2=sin(p.x*5.0-t*.3+snoise(p*2.0-t*.15)*1.0)*.15;float wave3=sin(p.x*1.5+t*.5+snoise(p*.8+t*.08)*2.0)*.2;float waveVal=wave1+wave2+wave3;float dist=p.y-waveVal;float intensity=smoothstep(.3,-.4,dist);intensity+=smoothstep(.0,-.6,dist)*.3;vec2 pixelCoord=floor(gl_FragCoord.xy/u_pxSize);float threshold=bayer8(pixelCoord);float dithered=step(threshold,intensity);vec3 col=mix(u_colBack,u_colFront,dithered);fragColor=vec4(col,1.0);}`;function makeShader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s}const prog=gl.createProgram();gl.attachShader(prog,makeShader(gl.VERTEX_SHADER,VERT));gl.attachShader(prog,makeShader(gl.FRAGMENT_SHADER,FRAG));gl.linkProgram(prog);gl.useProgram(prog);const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(prog,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);const loc={res:gl.getUniformLocation(prog,'u_res'),time:gl.getUniformLocation(prog,'u_time'),pxSize:gl.getUniformLocation(prog,'u_pxSize'),front:gl.getUniformLocation(prog,'u_colFront'),back:gl.getUniformLocation(prog,'u_colBack')};function resize(){const dpr=Math.min(devicePixelRatio,2);canvas.width=canvas.clientWidth*dpr;canvas.height=canvas.clientHeight*dpr;gl.viewport(0,0,canvas.width,canvas.height)}new ResizeObserver(resize).observe(canvas.parentElement);(function render(t){gl.uniform2f(loc.res,canvas.width,canvas.height);gl.uniform1f(loc.time,t*.001*.6);gl.uniform1f(loc.pxSize,3.0);gl.uniform3f(loc.front,224/255,0,0);gl.uniform3f(loc.back,0,0,0);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(render)})(0)})();
 
-      const VERT = `#version 300 es
-        in vec2 position;
-        out vec2 vUv;
-        void main() { vUv = position * .5 + .5; gl_Position = vec4(position,0,1); }`;
 
-      const FRAG = `#version 300 es
-        precision highp float;
-        in vec2 vUv;
-        out vec4 fragColor;
-        uniform vec2 u_res;
-        uniform float u_time;
-        uniform float u_pxSize;
-        uniform vec3 u_colFront;
-        uniform vec3 u_colBack;
-
-        // 8x8 Bayer matrix
-        float bayer8(vec2 p) {
-          ivec2 c = ivec2(mod(p, 8.0));
-          int i = c.x + c.y * 8;
-          // Bayer 8x8 threshold
-          int b[64] = int[64](
-             0,32, 8,40, 2,34,10,42,
-            48,16,56,24,50,18,58,26,
-            12,44, 4,36,14,46, 6,38,
-            60,28,52,20,62,30,54,22,
-             3,35,11,43, 1,33, 9,41,
-            51,19,59,27,49,17,57,25,
-            15,47, 7,39,13,45, 5,37,
-            63,31,55,23,61,29,53,21
-          );
-          return float(b[i]) / 64.0;
-        }
-
-        // Simplex-like noise
-        vec3 perm(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}
-        float snoise(vec2 v){
-          const vec4 C=vec4(.211325,.366025,-.577350,.024390);
-          vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);
-          vec2 i1=(x0.x>x0.y)?vec2(1,0):vec2(0,1);
-          vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);
-          vec3 p=perm(perm(i.y+vec3(0,i1.y,1))+i.x+vec3(0,i1.x,1));
-          vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);
-          m=m*m;m=m*m;
-          vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-.5;
-          vec3 ox=floor(x+.5);vec3 a0=x-ox;
-          m*=1.79284-.85373*(a0*a0+h*h);
-          vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;
-          return 130.0*dot(m,g);
-        }
-
-        void main(){
-          vec2 uv = vUv;
-          float ratio = u_res.x / u_res.y;
-          vec2 p = uv - .5;
-          p.x *= ratio;
-          float t = u_time;
-
-          // Wave shape
-          float wave1 = sin(p.x * 3.0 + t * .4 + snoise(p * 1.5 + t * .1) * 1.5) * .25;
-          float wave2 = sin(p.x * 5.0 - t * .3 + snoise(p * 2.0 - t * .15) * 1.0) * .15;
-          float wave3 = sin(p.x * 1.5 + t * .5 + snoise(p * .8 + t * .08) * 2.0) * .2;
-          float waveVal = wave1 + wave2 + wave3;
-          float dist = p.y - waveVal;
-
-          // Smooth intensity
-          float intensity = smoothstep(.3, -.4, dist);
-          intensity += smoothstep(.0, -.6, dist) * .3;
-
-          // Pixelate for dithering
-          vec2 pixelCoord = floor(gl_FragCoord.xy / u_pxSize);
-          float threshold = bayer8(pixelCoord);
-
-          // Dither decision
-          float dithered = step(threshold, intensity);
-
-          vec3 col = mix(u_colBack, u_colFront, dithered);
-          fragColor = vec4(col, 1.0);
-        }`;
-
-      function makeShader(type,src){
-        const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);
-        if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(s));
-        return s;
-      }
-      const prog=gl.createProgram();
-      gl.attachShader(prog,makeShader(gl.VERTEX_SHADER,VERT));
-      gl.attachShader(prog,makeShader(gl.FRAGMENT_SHADER,FRAG));
-      gl.linkProgram(prog);gl.useProgram(prog);
-      const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-      gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-      const pos=gl.getAttribLocation(prog,'position');
-      gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
-
-      const loc={
-        res:gl.getUniformLocation(prog,'u_res'),
-        time:gl.getUniformLocation(prog,'u_time'),
-        pxSize:gl.getUniformLocation(prog,'u_pxSize'),
-        front:gl.getUniformLocation(prog,'u_colFront'),
-        back:gl.getUniformLocation(prog,'u_colBack')
-      };
-
-      function resize(){
-        const dpr=Math.min(devicePixelRatio,2);
-        canvas.width=canvas.clientWidth*dpr;
-        canvas.height=canvas.clientHeight*dpr;
-        gl.viewport(0,0,canvas.width,canvas.height);
-      }
-      new ResizeObserver(resize).observe(canvas.parentElement);
-
-      (function render(t){
-        gl.uniform2f(loc.res,canvas.width,canvas.height);
-        gl.uniform1f(loc.time,t*0.001*0.6);
-        gl.uniform1f(loc.pxSize,3.0);
-        gl.uniform3f(loc.front, 224/255, 0, 0);     // #E00000
-        gl.uniform3f(loc.back, 0, 0, 0);              // #000000
-        gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-        requestAnimationFrame(render);
-      })(0);
-    })();
   </script>
 </body>
 </html>
